@@ -12,7 +12,7 @@
             ))
         )))
 ;; TODO: let constraints be directly accessed
-;; create separate validator function that returns [:valid true :errors []] or [:valid false :errors failed-validations] 
+;; create separate validator function that returns {:valid true :errors []} or {:valid false :errors [failed-validations]} 
 
 (defn non-empty-string? [s]
   (and (string? s) (< 0 (.length (.trim s)))))
