@@ -1,7 +1,8 @@
 (ns defdata.core-test
-  (:use clojure.test
-        defdata.core))
+  (:use midje.sweet)
+  (:require defdata.core-defs)
+  (:import java.net.FileNameMap))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(fact (instance? FileNameMap (defdata.core-defs/new-FileThing 5))=> true)
+(fact (instance? defdata.core_defs.FileThing (defdata.core-defs/new-FileThing 5)) => true)
+(fact (defdata.core-defs/new-FileThing "foo") => (throws AssertionError))
