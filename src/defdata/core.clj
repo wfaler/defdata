@@ -2,6 +2,8 @@
 
 
 (defmacro defdata
+  "Takes a name for a defrecord to be created, it's fields, a vector of constraints for the fields like [(number? a)] and optional defrecord options such as interfaces/protocols implemented and their methods.
+  Creates the defrecord and additionally a new-[RecordName] defn which validates inputs before creating a record, either returning a new record or throwing an AssertionError"
   ([type-name field-list constraints & etc]
      `(do
         (defrecord ~type-name ~field-list ~@etc)
