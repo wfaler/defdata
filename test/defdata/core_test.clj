@@ -9,6 +9,9 @@
 (fact (instance? defdata.core_defs.FileThing (defdata.core-defs/new-FileThing 5)) => true)
 (fact (defdata.core-defs/new-FileThing "foo") => (throws AssertionError))
 
+(fact (instance? defdata.core_defs.Foo (defdata.core-defs/new-Foo 5)) => true)
+(fact (defdata.core-defs/new-Foo "foo") => (throws AssertionError))
+
 (fact (defdata.core/non-empty-string? nil) => false)
 (fact (defdata.core/non-empty-string? "") => false)
 (fact (defdata.core/non-empty-string? "  ") => false)

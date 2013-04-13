@@ -9,3 +9,5 @@
   FileNameMap ;; protocols/interfaces implemented
   (getContentTypeFor [this fileName] (str a "-" fileName))) ;; implemented protocol/interface methods
 
+(defdata Foo [a]
+  [(number? a)])
