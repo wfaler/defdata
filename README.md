@@ -7,11 +7,13 @@ Clojure experimentation in self-validating data types.
 
 A definition such as:
 
+```clojure
   (defdata MyDataType [name age] 
     {:name non-empty-string? :age number?} ;; map with validation functions for each key in a concrete instance
     SomeProtocol ;; optional protocol/interface implementations
       (some-protocol-fn-impl [a] (println a)) ;; implementation of protocol functions
   )
+```
 
 Will generate the following:
 * A defrecord with the given properties and protocol implementations
