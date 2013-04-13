@@ -4,10 +4,20 @@
   "asserts whether an input is a String and non-empty (after trimming), returns true or false"
   (and (string? s) (< 0 (.length (.trim s)))))
 
-(defn validate-key [kw value constraints]
+(defn- validate-key [kw value constraints]
   (if (not= nil (kw constraints))
     ((kw constraints) (kw value))
     false))
+
+(defn validate [value validation-set]
+  "takes a record or map, and a map containing constraints in the form {:key validation-fn}
+  returns either {:right value} on success or {:left keys-with-errors} on failure"
+  (if (empty? (keys validation-set))
+    {:valid true}
+    (let [invalid-keys (filter #(not (validate-key %1 value validation-set)) (keys validation-set))]
+              (if (empty? invalid-keys)
+                {:right value}
+                {:left invalid-keys}))))
 
 
 (defmacro defdata
@@ -15,21 +25,15 @@
   and optional defrecord options such as interfaces/protocols implemented and their methods.
   Creates the defrecord and additionally a new-[RecordName] defn which validates inputs before creating a record,
   either returning a new record or throwing an AssertionError.
-  Also creates a defn validate-[type] that validates objects and returns {:valid true} or {:valid false :errors list-of-keys}"
+  Also binds the constraints constraints-[type] which can then be used as input to the validate function"
   ([type-name field-list constraint-map & etc]
      `(do
         (defrecord ~type-name ~field-list ~@etc)
-        (defn ~(symbol (str "validate-" type-name)) [~type-name]
-          (if (empty? (keys ~constraint-map))
-            {:valid true}
-            (let [invalid-keys# (filter #(not (validate-key %1 ~type-name ~constraint-map)) (keys ~constraint-map))]
-              (if (empty? invalid-keys#)
-                {:valid true}
-                {:valid false :errors invalid-keys#}))))
+        (def ~(symbol (str "constraints-" type-name)) ~constraint-map)
         (defn ~(symbol (str "new-" type-name)) ~field-list
           (let [value# (new ~type-name ~@field-list)
-                validations# (~(symbol (str "validate-" type-name)) value#)]
-            (if (:valid validations#)
+                validations# (validate value# ~(symbol (str "constraints-" type-name)))]
+            (if (:right validations#)
               value#
               (assert false (str "cannot create new " ~type-name ", one or more of its arguments are invalid: " ~field-list))
               )
