@@ -18,6 +18,7 @@
 ;; TODO: let constraints be directly accessed
 ;; create separate validator function that returns {:valid true :errors []} or {:valid false :errors [failed-validations]} 
 
+
 (defn non-empty-string? [s]
   "asserts whether an input is a String and non-empty (after trimming), returns true or false"
   (and (string? s) (< 0 (.length (.trim s)))))
