@@ -11,10 +11,11 @@
 
 
 (defmacro defdata
-  "Takes a name for a defrecord to be created, it's fields, a vector of constraints for the fields like [(number? a)]
+  "Takes a name for a defrecord to be created, it's fields, a map of constraints for the fields like {:key validator-fn?}
   and optional defrecord options such as interfaces/protocols implemented and their methods.
   Creates the defrecord and additionally a new-[RecordName] defn which validates inputs before creating a record,
-  either returning a new record or throwing an AssertionError"
+  either returning a new record or throwing an AssertionError.
+  Also creates a defn validate-[type] that validates objects and returns {:valid true} or {:valid false :errors list-of-keys}"
   ([type-name field-list constraint-map & etc]
      `(do
         (defrecord ~type-name ~field-list ~@etc)
