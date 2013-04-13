@@ -8,9 +8,11 @@
 (fact (instance? FileNameMap (defdata.core-defs/new-FileThing 5))=> true)
 (fact (instance? defdata.core_defs.FileThing (defdata.core-defs/new-FileThing 5)) => true)
 (fact (defdata.core-defs/new-FileThing "foo") => (throws AssertionError))
-
+;; a type that does not implement any protocols
 (fact (instance? defdata.core_defs.Foo (defdata.core-defs/new-Foo 5)) => true)
 (fact (defdata.core-defs/new-Foo "foo") => (throws AssertionError))
+;; a type that takes multiple arguments
+(fact (instance? defdata.core_defs.Bar (defdata.core-defs/new-Bar 2 2)) => true)
 
 (fact (defdata.core/non-empty-string? nil) => false)
 (fact (defdata.core/non-empty-string? "") => false)

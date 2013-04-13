@@ -11,3 +11,6 @@
 
 (defdata Foo [a]
   [(number? a)])
+
+(defdata Bar [a b]
+  [(number? a)])

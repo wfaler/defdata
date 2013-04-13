@@ -11,7 +11,7 @@
         (defrecord ~type-name ~field-list ~@etc)
         (defn ~(symbol (str "new-" type-name)) ~field-list
           (if (every? true? ~constraints)
-            (new ~type-name ~field-list)
+            (new ~type-name ~@field-list)
             (assert false (str "cannot create new " ~type-name ", one of its arguments is invalid: " ~field-list))
             ))
         )))
