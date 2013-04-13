@@ -30,10 +30,12 @@ Finally, a def holding the provided constraints for the record is bound to a nam
 ```clojure
   (validate 
      (new-MyDataType "John Doe" 30) 
-     constraints-MyDataType) ;; will return a {:right value}, where value is the initialised MyDataType
+     constraints-MyDataType) 
+  ;; will return a {:right value}, where value is the initialised MyDataType
 
   (validate
      (new-MyDataType "" "foo")
-     constraints-MyDataType) ;; will return a {:left [:name :age]} indicating failure of validation of name and age attributes
+     constraints-MyDataType) 
+  ;; will return a {:left [:name :age]} indicating failure of validation of name and age attributes
 ```
 Additionally, the validate function can validate any map, in the above example if the input is a map that looks like a MyDataType it may pass validation if it contains all required attributes in valid form
