@@ -5,12 +5,12 @@
 ;; different namespace to ensure the code works across namespaces
 ;; will generate a defrecord FileThing and a creation defn new-FileThing that asserts all inputs are valid
 (defdata FileThing [a]
-  [(number? a)] ;; vector with validation assertions against creation arguments
+  {:a number?} ;; vector with validation assertions against creation arguments
   FileNameMap ;; protocols/interfaces implemented
   (getContentTypeFor [this fileName] (str a "-" fileName))) ;; implemented protocol/interface methods
 
 (defdata Foo [a]
-  [(number? a)])
+  {:a number?})
 
 (defdata Bar [a b]
-  [(number? a)])
+  {:a number?})
