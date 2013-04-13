@@ -36,7 +36,8 @@ Finally, a def holding the provided constraints for the record is bound to a nam
   (validate
      {:name "Wille" :age "foo"}
      constraints-MyDataType) 
-  ;; will return a {:left [:age]} indicating failure of validation of the age attribute (in a vector in case there are multiple failures
+  ;; will return a {:left [:age]} indicating failure of validation of the age attribute 
+  ;; (in a vector in case there are multiple failures
 ```
 Additionally, the validate function can validate any map, in the above example if the input is a map that looks like a MyDataType it may pass validation if it contains all required attributes in valid form.
 As a note, the eagle-eyed may notice that the :left and :right notation for the return value of the validate function is borrowed from Haskells and Scalas Either-type.
