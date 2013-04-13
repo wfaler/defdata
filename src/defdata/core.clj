@@ -17,7 +17,7 @@
     (let [invalid-keys (filter #(not (validate-key %1 value validation-set)) (keys validation-set))]
               (if (empty? invalid-keys)
                 {:right value}
-                {:left invalid-keys}))))
+                {:left (vec invalid-keys)}))))
 
 
 (defmacro defdata
