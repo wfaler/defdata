@@ -1,8 +1,9 @@
-(ns defdata.core)
+(ns defdata.core
+  (:require [clojure.string]))
 
 (defn non-empty-string? [s]
   "asserts whether an input is a String and non-empty (after trimming), returns true or false"
-  (and (string? s) (< 0 (.length (.trim s)))))
+  (not (clojure.string/blank? s)))
 
 (defn- validate-key [kw value constraints]
   (if (not= nil (kw constraints))
