@@ -23,8 +23,8 @@
 (fact ((defdata.core/valid? defdata.core-defs/constraints-Foo) {:a 5}) => true)
 (fact ((defdata.core/valid? defdata.core-defs/constraints-Foo) {:a "5"}) => false)
 
-(fact (defdata.core/fold {:left 2} (partial + 2) (partial - 2)) => 4)
-(fact (defdata.core/fold {:right 2} (partial + 2) (partial - 2)) => 0)
+(fact (defdata.core/fold (partial + 2) (partial - 2) {:left 2}) => 4)
+(fact (defdata.core/fold (partial + 2) (partial - 2) {:right 2}) => 0)
 
 (fact (defdata.core/non-empty-string? nil) => false)
 (fact (defdata.core/non-empty-string? "") => false)

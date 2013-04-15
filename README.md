@@ -58,8 +58,8 @@ In the above example the valid? function with constraints-Foo will generate a va
 If you want to use the validate function, you can do the following to pass off the success or failure without having to resort to nasty if-statements and map lookups:
 
 ```clojure
-  (fold (validate constraints-Foo foo) failure-fn success-fn)
-  ;; failure-fn deals with validation failures, taking a vector of error keys
-  ;; success-fn deals with success taking the object under validation as its argument
+  (fold failure-fn success-fn (validate constraints-Foo foo))
+  ;; failure-fn is your function that deals with validation failures, taking a vector of error keys
+  ;; success-fn is your function that deals with success taking the object under validation as its argument
   
 ```

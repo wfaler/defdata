@@ -24,7 +24,7 @@
   ([constraints] (partial valid? constraints))
   ([constraints value] (nil? (:left (validate constraints value)))))
 
-(defn fold [either fail-fn success-fn]
+(defn fold [fail-fn success-fn either]
   (if (:right either)
     (success-fn (:right either))
     (fail-fn (:left either))))
