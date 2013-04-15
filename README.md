@@ -31,7 +31,7 @@ Finally, a def holding the provided constraints for the record is bound to a nam
   (validate 
      constraints-MyDataType
      {:name "John Doe" :age 30}) 
-  ;; will return a {:right value}, where value is the initialised MyDataType
+  ;; will return a {:right value}, where value is the map passed in
 
   (validate
      constraints-MyDataType
