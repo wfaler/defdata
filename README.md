@@ -55,7 +55,7 @@ In the above example the valid? function with constraints-Foo will generate a va
 
 ### Dealing with validation failure or success
 
-If you want to use the validate function, you can do the following:
+If you want to use the validate function, you can do the following to pass off the success or failure without having to resort to nasty if-statements and map lookups:
 
 ```clojure
   (fold (validate constraints-Foo foo) failure-fn success-fn)
