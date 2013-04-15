@@ -20,6 +20,15 @@
                 {:right value}
                 {:left (vec invalid-keys)}))))
 
+(defn valid?
+  ([constraints] (partial valid? constraints))
+  ([constraints value] (nil? (:left (validate value constraints)))))
+
+(defn fold [either fail-fn success-fn]
+  (if (:right either)
+    (success-fn (:right either))
+    (fail-fn (:left either))))
+
 
 (defmacro defdata
   "Takes a name for a defrecord to be created, it's fields, a map of constraints for the fields like {:key validator-fn?}
