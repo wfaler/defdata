@@ -10,7 +10,7 @@
     ((kw constraints) (kw value))
     false))
 
-(defn validate [value validation-set]
+(defn validate [validation-set value]
   "takes a record or map, and a map containing constraints in the form {:key validation-fn}
   returns either {:right value} on success or {:left keys-with-errors} on failure"
   (if (empty? (keys validation-set))
@@ -22,7 +22,7 @@
 
 (defn valid?
   ([constraints] (partial valid? constraints))
-  ([constraints value] (nil? (:left (validate value constraints)))))
+  ([constraints value] (nil? (:left (validate constraints value)))))
 
 (defn fold [either fail-fn success-fn]
   (if (:right either)
@@ -42,7 +42,7 @@
         (def ~(symbol (str "constraints-" type-name)) ~constraint-map)
         (defn ~(symbol (str "new-" type-name)) ~field-list
           (let [value# (new ~type-name ~@field-list)
-                validations# (validate value# ~(symbol (str "constraints-" type-name)))]
+                validations# (validate ~(symbol (str "constraints-" type-name)) value#)]
             (if (:right validations#)
               value#
               (assert false (str "cannot create new " ~type-name ", one or more of its arguments are invalid: " ~field-list))

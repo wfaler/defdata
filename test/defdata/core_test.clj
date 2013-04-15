@@ -14,8 +14,8 @@
 ;; a type that takes multiple arguments
 (fact (instance? defdata.core_defs.Bar (defdata.core-defs/new-Bar 2 2)) => true)
 
-(fact (defdata.core/validate {:a 5} defdata.core-defs/constraints-Foo) => {:right {:a 5}})
-(fact (defdata.core/validate {:a "Foo"} defdata.core-defs/constraints-Foo) => {:left [:a]})
+(fact (defdata.core/validate defdata.core-defs/constraints-Foo {:a 5}) => {:right {:a 5}})
+(fact (defdata.core/validate defdata.core-defs/constraints-Foo {:a "Foo"}) => {:left [:a]})
 
 (fact (defdata.core/valid? defdata.core-defs/constraints-Foo {:a 5}) => true)
 (fact (defdata.core/valid? defdata.core-defs/constraints-Foo {:a "5"}) => false)

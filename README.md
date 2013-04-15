@@ -29,13 +29,13 @@ Finally, a def holding the provided constraints for the record is bound to a nam
 
 ```clojure
   (validate 
-     {:name "John Doe" :age 30} 
-     constraints-MyDataType) 
+     constraints-MyDataType
+     {:name "John Doe" :age 30}) 
   ;; will return a {:right value}, where value is the initialised MyDataType
 
   (validate
-     {:name "Wille" :age "foo"}
-     constraints-MyDataType) 
+     constraints-MyDataType
+     {:name "Wille" :age "foo"}) 
   ;; will return a {:left [:age]} indicating failure of validation of the age attribute 
   ;; (in a vector in case there are multiple failures
 ```
