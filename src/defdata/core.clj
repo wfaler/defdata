@@ -21,10 +21,16 @@
                 {:left (vec invalid-keys)}))))
 
 (defn valid?
-  ([constraints] (partial valid? constraints))
-  ([constraints value] (nil? (:left (validate constraints value)))))
+
+  ([constraints]
+     {:pre (map? constraints)}
+     (partial valid? constraints))
+  ([constraints value]
+     {:pre (map? constraints)}
+     (nil? (:left (validate constraints value)))))
 
 (defn fold [fail-fn success-fn either]
+  {:pre [(and (map? either) (or (:left either) (:right either)))]}
   (if (:right either)
     (success-fn (:right either))
     (fail-fn (:left either))))
